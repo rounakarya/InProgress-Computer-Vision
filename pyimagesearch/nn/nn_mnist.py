@@ -12,11 +12,17 @@ import numpy as np
 # represented by an 8 x 8 = 64-dim feature vector)
 print("[INFO] loading MNIST (sample) dataset...")
 digits = datasets.load_digits()
+
     # Try displaying an image of the MNIST dataset
-    # img = digits.images[0]
+    #img = digits.images[0]
     # cv2.imwrite("image.jpg", img)
-    # cv2.imshow("image", img)
+    #cv2.imshow("image", img)
     # cv2.waitKey()
+
+#imag = cv2.imread("image3.bmp")
+#gray = cv2.cvtColor(imag, cv2.COLOR_BGR2GRAY)
+#print(imag)
+
 data = digits.data.astype("float")
 # normalizing the data between 0-1 using min-max normalization technique
 data = (data - data.min()) / (data.max() - data.min())
