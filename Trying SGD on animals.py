@@ -1,6 +1,7 @@
 import sys
 from os import path
-sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+
+sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
@@ -13,9 +14,11 @@ import matplotlib.pyplot as plt
 import cv2
 import argparse
 
+
 def sigmoid_activation(x):
     # compute the sigmoid activation value for a given input
     return 1.0 / (1 + np.exp(-x))
+
 
 def predict(X, W):
     # take the dot product between our features and weight matrix
@@ -27,11 +30,13 @@ def predict(X, W):
     # return the predictions
     return preds
 
+
 def next_batch(X, y, batchSize):
     # loop over our dataset ‘X‘ in mini-batches, yielding a tuple of
     # the current batched data and labels
     for i in np.arange(0, X.shape[0], batchSize):
         yield (X[i:i + batchSize], y[i:i + batchSize])
+
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -53,25 +58,23 @@ sdl = SimpleDatasetLoader(preprocessors=[sp])
 (data, labels) = sdl.load(imagePaths, verbose=500)
 data = data.reshape((data.shape[0], 3072))
 
-
 le = LabelEncoder()
 labels = le.fit_transform(labels)
 
 W = np.random.randn(3, 3072)
 b = np.random.randn(3)
-#temp = W.dot(trainX[0]) + b
+# temp = W.dot(trainX[0]) + b
 X = np.empty(shape=[0, 3])
-
 
 for i in data:
     temp = W.dot(i) + b
-    X = np.append(X, [temp], axis = 0)
+    X = np.append(X, [temp], axis=0)
 
 labels = labels.reshape((labels.shape[0], 1))
 X = np.c_[X, np.ones((X.shape[0]))]
 
-(trainX, testX, trainY, testY) = train_test_split(X,labels,
-   test_size=0.25, random_state=42)
+(trainX, testX, trainY, testY) = train_test_split(X, labels,
+                                                  test_size=0.25, random_state=42)
 
 # initialize our weight matrix and list of losses
 print("[INFO] training...")
@@ -111,7 +114,7 @@ for epoch in np.arange(0, args["epochs"]):
         print("[INFO] epoch={}, loss={:.7f}".format(int(epoch + 1), loss))
 
 # evaluate our model
-print("[INFO] evaluating...")
+print("[INFO] evaluating model...")
 preds = predict(testX, W_SGD)
 print(classification_report(testY, preds))
 
