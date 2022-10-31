@@ -1,4 +1,4 @@
-# InProgress-Computer-Vision
+# InProgress-Computer-Vision- Deep-Learning
 
 Files Related To The Learnings in Computer Vision / Deep Learning 
 This document contains details for the Computer vision/deep learning project.
